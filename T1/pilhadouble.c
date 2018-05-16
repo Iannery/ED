@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "pilha.h"
+#include "pilhadouble.h"
 #include <stdio.h>
 
 Pilha* cria_pilha(int m){
@@ -33,7 +33,7 @@ int empilhar_pilha(item m, Pilha *p){
 	(p -> top)++;
 	p -> it[p -> top] = m;
 }
-int desempilhar_pilha(Pilha *p){
+item desempilhar_pilha(Pilha *p){
 	item m;
 	if(pilha_vazia(p) == 1){
 		printf("pilha vazia.\n");
@@ -43,7 +43,7 @@ int desempilhar_pilha(Pilha *p){
 	(p -> top)--;
 	return m;
 }
-int topo_pilha(Pilha *p){
+double topo_pilha(Pilha *p){
 	item m;
 	m = p -> it[p -> top];
 	return m;
