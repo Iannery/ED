@@ -78,7 +78,7 @@ double strtolf(char* expr){
     if(m){
         for(i = (m - 1), j = 0; j < m; i--, j++){
             auxconv = converter(expr[j]);
-            tot += pow(auxconv, i);
+            tot += auxconv * pow(10, i);
         }
         for(i = 0, j = m + 1; j < tamstr; i++, j++){
             auxconv = converter(expr[j]);
@@ -102,44 +102,37 @@ double eval_exp(char* expr){
     int i, j, k;
     double_stack = cria_pilha(50);
     double aux_operand1, aux_operand2, aux_operand_tot, tot;
-    puts("TUDO BEM ATE AQUI2");
     for(i = 0; i < strlen(expr); i++){
         if(is_operand(expr[i]) && expr[i] != ' '){
-            puts("TUDO BEM ATE AQUIO");
+            printf(" ");
             for(j = i, k = 0; expr[j] != ' '; j++, k++){
                 aux_str[k] = expr[j];
             }
-            puts("TUDO BEM ATE AQUIO2");
             aux_str[k] = '\0';
             i = j;
-            puts("TUDO BEM ATE AQUIO3");
             empilhar_pilha(strtolf(aux_str), double_stack);
         }
-        puts("TUDO BEM ATE AQUIOOOO");
-        printf("e operador??%d\n", is_operator(expr[i]));
         if(is_operator(expr[i])){
             aux_operand1 = desempilhar_pilha(double_stack); // Ultimo numero a ser empilhado
             aux_operand2 = desempilhar_pilha(double_stack); // Penultimo a ser empilhado
             switch(expr[i]){
                 case '+':
-                    puts("ENTROU ADICAO");
-                    aux_operand_tot = aux_operand1 + aux_operand2;
-                    printf("%lf %lf %lf ", aux_operand_tot, aux_operand1, aux_operand2);
+                    aux_operand_tot = aux_operand2 + aux_operand1;
                     break;
                 case '-':
-                    aux_operand_tot = aux_operand1 - aux_operand2;
+                     aux_operand_tot = aux_operand2 - aux_operand1;
                     break;
                 case '*':
-                    aux_operand_tot = aux_operand1 * aux_operand2;
+                    aux_operand_tot = aux_operand2 * aux_operand1;
                     break;
                 case '/':
-                    if(aux_operand2 == 0){
-                        puts("DIVISAO POR 0!!!!");
+                    if((int)aux_operand1 == 0){
+                        printf("DIVISAO POR 0!!!!\n");
                         destroi_pilha(double_stack);
                         return 0;
                     }
                     else{
-                        aux_operand_tot = aux_operand1 / aux_operand2;
+                        aux_operand_tot = aux_operand2 / aux_operand1;
                         break;
                     }
             }
@@ -180,7 +173,7 @@ void inf_to_postf(char* exp_infix, char* exp_postfix){
             }
         }
         else{
-            puts("Expressao invalida");
+            printf("Expressao invalida\n");
         }
     }
     while(!pilha_vazia_char(itp_stack)){
@@ -203,7 +196,7 @@ int validate_exp(char* expression){
                 break;
             case ')':
                 if(pilha_vazia_char(val_stack)){
-                    puts("Equacao invalida");
+                    printf("Equacao invalida\n");
                     validvar = 0;
                 }
                 else if(desempilhar_pilha_char(val_stack) == '('){
@@ -212,7 +205,7 @@ int validate_exp(char* expression){
         }
     }
     if(!pilha_vazia_char(val_stack)){
-        puts("Equacao invalida");
+        printf("Equacao invalida\n");
         validvar = 0;
     }
     destroi_pilha_char(val_stack);
@@ -221,21 +214,19 @@ int validate_exp(char* expression){
 
 int resprob(){
     char expression[101], exp_postfix[101];
-    double topper;
-    puts("Digita uma string");
-    getchar();
-    gets(expression);
+    double res;
+    printf("Digite uma string\n");
+    scanf(" %[^\n]s ", expression);
+    strcat(expression, " ");
     if(!validate_exp(expression)){
         return 0;
     }
     inf_to_postf(expression, exp_postfix);
-    puts("Expressoes:::::");
-    puts(expression);
-    puts(exp_postfix);
-    puts("TUDO BEM ATE AQUI1");
-    topper = eval_exp(exp_postfix);
-    printf("%lf\n", topper);
-
+    printf("Expressoes:::::\n");
+    printf("%s\n", expression);
+    printf("%s\n", exp_postfix);
+    res = eval_exp(exp_postfix);
+    printf("\n%lf\n", res);
 }
 
 // ---------------------------MISC------------------------------------------
@@ -253,10 +244,10 @@ int main(){
             case 1:
                 resprob();
                 break;
-            case 2:
-                // calc();
+ /*            case 2:
+                calc();
                 break;
-            case 3:
+  */           case 3:
                 flagrun = 0;
                 break;
         }
