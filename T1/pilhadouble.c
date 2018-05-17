@@ -48,6 +48,13 @@ double topo_pilha(Pilha *p){
 	m = p -> it[p -> top];
 	return m;
 }
+
+void mostra_pilha(Pilha *p){
+	for(int i = 0; i <= p -> top; i++){
+		printf("%d. %lf\n", p->top - i + 1, p->it[i]);
+	}
+}
+
 void destroi_pilha(Pilha *p){
 	free((p)->it);
 	free (p);

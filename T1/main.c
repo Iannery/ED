@@ -4,6 +4,13 @@
 #include <math.h>
 #include "pilhachar.h"
 #include "pilhadouble.h"
+// -------------------------------------------------------------------------
+// ---------------------------MISC------------------------------------------
+
+void printmenu(){
+    printf("Escolha uma opcao:\n");
+    printf("1.\tResolucao de expressao\n2.\tCalculadora\n3.\tSair\n\n>>");
+}
 
 int priority(char op){
     if(op == '*' || op == '/'){
@@ -39,8 +46,12 @@ int is_operator(char op){
         return 0;
     }
 }
+// -----------------------------------------------------------------------------
+// -----------------------------END MISC-----------------------------------------
 
 
+// ------------------------------------------------------------------------------
+// ----------------------------AVALIADOR DE EXPRESSAO----------------------------------
 int converter(char op){
     switch(op){
         case '0':
@@ -149,7 +160,7 @@ double eval_exp(char* expr){
 
 void inf_to_postf(char* exp_infix, char* exp_postfix){
     Pilha_char* itp_stack;
-    int i, j;
+    int i, j, error = 0;
     itp_stack = cria_pilha_char(strlen(exp_infix));
     for(i = 0, j = 0; i < strlen(exp_infix); i++){
         if(is_operand(exp_infix[i])){
@@ -174,9 +185,11 @@ void inf_to_postf(char* exp_infix, char* exp_postfix){
         }
         else{
             printf("Expressao invalida\n");
+            error = 1;
+            break;
         }
     }
-    while(!pilha_vazia_char(itp_stack)){
+    while(!pilha_vazia_char(itp_stack) && !error){
         exp_postfix[j] = desempilhar_pilha_char(itp_stack);
         j++;
     }
@@ -229,12 +242,21 @@ int resprob(){
     printf("\n%lf\n", res);
 }
 
-// ---------------------------MISC------------------------------------------
+// ---------------------------------------------------------------------------------
+// -----------------------------END AVALIADOR---------------------------------------
 
-void printmenu(){
-    printf("Escolha uma opcao:\n");
-    printf("1.\tResolucao de expressao\n2.\tCalculadora\n3.\tSair\n\n>>");
+
+// ---------------------------------------------------------------------------------
+// ------------------------------CALCULADORA----------------------------------------
+
+void calc(){
+    
 }
+
+
+
+
+
 int main(){
     int menusel, flagrun = 1;
     while(flagrun){    
@@ -244,10 +266,10 @@ int main(){
             case 1:
                 resprob();
                 break;
- /*            case 2:
+            case 2:
                 calc();
                 break;
-  */           case 3:
+            case 3:
                 flagrun = 0;
                 break;
         }
