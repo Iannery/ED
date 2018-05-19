@@ -21,6 +21,20 @@
 #ifndef ED_CALCULATOR_H
 #define ED_CALCULATOR_H
 
+
+/** @brief Determina se o parâmetro é um operador.
+ *  @param op Determina o caractere(char) a ser analisado.
+ *  @return 1, Caso seja um operador válido;
+ *  0, caso contrário.
+ */
+int is_operatorcalc(char op);
+
+/** @brief Mostra na tela as instruções do modo calculadora.
+ *  @details A função avisa sobre a necessidade da leitura do README para
+ *  utilização da ferramenta calculadora, e mostra o comando de saída da mesma.
+ */
+void printcalcinstr();
+
 /** @brief Converte o caractere do parâmetro em um inteiro.
  *  @see strtolfcalc()
  *  @param op Determina o caractere(char) a ser analisado.

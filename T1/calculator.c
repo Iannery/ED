@@ -77,6 +77,20 @@ double strtolfcalc(char* expr){
     }
     return tot;
 }
+
+int is_operatorcalc(char op){
+    if(op == '*' || op == '/' || op == '+' || op == '-'){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+void printcalcinstr(){
+    printf("Digite os operadores e operandos como especificado no README.txt.\n");
+    printf("Para sair, digite 'exit'. \n");
+}
 //--------------------------------------------------------------------------
 
 void exclamationcalc(char op, Pilha* p){
@@ -169,7 +183,7 @@ void calc(){
         if((expr[0] >= '0' && expr[0] <= '9')){
             empilhar_pilha(strtolfcalc(expr), calc_stack);
         }
-        else if(is_operator(expr[0])){
+        else if(is_operatorcalc(expr[0])){
             if(calc_stack->top < 1){
                 printf("ERRO, PILHA NAO POSSUI OPERANDOS O SUFICIENTE PARA OPERACAO.\n");
             }

@@ -43,15 +43,6 @@ void printmenu(){
     printf("Escolha uma opcao:\n");
     printf("1.\tResolucao de expressao\n2.\tCalculadora\n3.\tSair\n\n>> ");
 }
-
-/** @brief Mostra na tela as instruções do modo calculadora.
- *  @details A função avisa sobre a necessidade da leitura do README para
- *  utilização da ferramenta calculadora, e mostra o comando de saída da mesma.
- */
-void printcalcinstr(){
-    printf("Digite os operadores e operandos como especificado no README.txt.\n");
-    printf("Para sair, digite 'exit'. \n");
-}
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
 
