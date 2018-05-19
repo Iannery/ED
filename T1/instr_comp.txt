@@ -1,9 +1,0 @@
-INSTRUÇÕES DE COMPILAÇÃO::
-
-gcc -c pilhachar.c
-gcc -c pilhadouble.c
-gcc -c calculator.c pilhachar.c pilhadouble.c -lm
-gcc -c resprob.c pilhachar.c pilhadouble.c -lm
-gcc -o main main.c calculator.o resprob.o pilhachar.o pilhadouble.o -lm
-
-execute o arquivo ./main
